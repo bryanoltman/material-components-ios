@@ -32,7 +32,6 @@ NSString *const MDCSnackbarMessageBoldAttributeName = @"MDCSnackbarMessageBoldAt
 @implementation MDCSnackbarMessage
 static BOOL _usesLegacySnackbar = NO;
 @synthesize accessibilityIdentifier;
-@dynamic text;
 
 + (instancetype)messageWithText:(NSString *)text {
   MDCSnackbarMessage *message = [[[self class] alloc] init];
@@ -86,12 +85,8 @@ static BOOL _usesLegacySnackbar = NO;
 
 #pragma mark Text
 
-- (void)setText:(NSString *)text {
-  self.attributedText = [[NSAttributedString alloc] initWithString:[text copy]];
-}
-
 - (NSString *)text {
-  return [self.attributedText string];
+  return _text ?: [self.attributedText string];
 }
 
 #pragma mark - Duration
