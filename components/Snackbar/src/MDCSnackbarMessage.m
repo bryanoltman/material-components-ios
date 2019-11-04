@@ -85,8 +85,14 @@ static BOOL _usesLegacySnackbar = NO;
 
 #pragma mark Text
 
-- (NSString *)text {
-  return _text ?: [self.attributedText string];
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+  _attributedText = attributedText;
+  _text = attributedText.string;
+}
+
+- (void)setText:(NSString *)text {
+  _text = text;
+  _attributedText = [[NSAttributedString alloc] initWithString:[text copy]];
 }
 
 #pragma mark - Duration
