@@ -28,8 +28,11 @@
 }
 
 - (void)applyColorThemeWithScheme:(nonnull id<MDCColorScheming>)colorScheme {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   [MDCFilledTextFieldColorThemer applySemanticColorScheme:colorScheme
                               toTextInputControllerFilled:self];
+#pragma clang diagnostic pop
 }
 
 - (void)applyTypographyThemeWithScheme:(nonnull id<MDCTypographyScheming>)typographyScheme {

@@ -19,15 +19,9 @@
 
 /**
  The Material Design color system's filled text field themer.
-
- @warning This API will eventually be deprecated. See the individual method documentation for
- details on replacement APIs.
- Learn more at docs/theming.md#migration-guide-themers-to-theming-extensions
  */
-@interface MDCFilledTextFieldColorThemer : NSObject
-@end
-
-@interface MDCFilledTextFieldColorThemer (ToBeDeprecated)
+__deprecated_msg("Please use the MaterialTextFields+Theming instead.")
+    @interface MDCFilledTextFieldColorThemer : NSObject
 
 /**
  Applies a color scheme's properties to a text field using the filled style.
