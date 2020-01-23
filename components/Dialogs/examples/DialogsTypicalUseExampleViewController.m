@@ -23,7 +23,7 @@
 
 #pragma mark - DialogsTypicalUseExampleViewController
 
-@interface DialogsTypicalUseExampleViewController : UIViewController
+@interface DialogsTypicalUseExampleViewController : UIViewController <MDCAlertControllerDelegate>
 @property(nonatomic, strong, nullable) id<MDCContainerScheming> containerScheme;
 @property(nonatomic, strong, nullable) NSArray *modes;
 @property(nonatomic, strong, nullable) MDCButton *button;
@@ -87,6 +87,7 @@
                                                                    message:messageString];
   alert.mdc_adjustsFontForContentSizeCategory = YES;
   alert.enableRippleBehavior = YES;
+  alert.delegate = self;
   MDCActionHandler handler = ^(MDCAlertAction *action) {
     NSLog(@"action pressed: %@", action.title);
   };
@@ -103,6 +104,11 @@
   [alert applyThemeWithScheme:self.containerScheme];
 
   [self presentViewController:alert animated:YES completion:NULL];
+}
+
+#pragma mark - MDCAlertControllerDelegate
+- (void)alertControllerDidDismiss:(MDCAlertController *)alertController {
+  NSLog(@"Dismissed");
 }
 
 @end
