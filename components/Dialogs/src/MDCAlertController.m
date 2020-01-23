@@ -130,11 +130,6 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
   return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  [self mdc_dialogPresentationController].dialogPresentationControllerDelegate = self;
-}
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
   [super traitCollectionDidChange:previousTraitCollection];
   if (self.traitCollectionDidChangeBlock) {
@@ -460,6 +455,7 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
   self.alertView = (MDCAlertControllerView *)self.view;
   // sharing MDCActionManager with with the alert view
   self.alertView.actionManager = self.actionManager;
+  [self mdc_dialogPresentationController].dialogPresentationControllerDelegate = self;
 }
 
 - (void)viewDidLoad {
