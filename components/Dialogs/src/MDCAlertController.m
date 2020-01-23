@@ -631,8 +631,8 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
 
 - (void)dialogPresentationControllerDidDismiss:
     (MDCDialogPresentationController *)dialogPresentationController {
-  if ([self.delegate respondsToSelector:@selector(dialogControllerDidDismiss:)]) {
-    [self.delegate dialogControllerDidDismiss:self];
+  if ([self.delegate respondsToSelector:@selector(alertControllerDidDismiss:)]) {
+    [self.delegate alertControllerDidDismiss:self];
   }
 }
 

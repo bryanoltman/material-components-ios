@@ -33,7 +33,7 @@
  This method allows a delegate conforming to MDCAlertControllerDelegate to respond to
  MDCAlertController dismissals.
  */
-- (void)dialogControllerDidDismiss:(nonnull MDCAlertController *)alertController;
+- (void)alertControllerDidDismiss:(nonnull MDCAlertController *)alertController;
 @end
 
 /**

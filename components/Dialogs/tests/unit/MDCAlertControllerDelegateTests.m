@@ -21,7 +21,7 @@
 @end
 
 @implementation AlertControllerDelegate
-- (void)dialogControllerDidDismiss:(MDCAlertController *)alertController {
+- (void)alertControllerDidDismiss:(MDCAlertController *)alertController {
   _wasDismissCalled = YES;
 }
 @end
