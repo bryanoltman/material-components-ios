@@ -20,6 +20,21 @@
 #import <UIKit/UIKit.h>
 
 @class MDCAlertAction;
+@class MDCAlertController;
+
+/**
+ MDCAlertControllerDelegate provides a method that allows a delegate of an
+ MDCAlertControllerDelegate to respond to its dismissals.
+ */
+@protocol MDCAlertControllerDelegate <NSObject>
+@optional
+
+/**
+ This method allows a delegate conforming to MDCAlertControllerDelegate to respond to
+ MDCAlertController dismissals.
+ */
+- (void)dialogControllerDidDismiss:(nonnull MDCAlertController *)alertController;
+@end
 
 /**
  MDCAlertController displays an alert message to the user, similar to UIAlertController.
@@ -52,6 +67,12 @@
 
 /** Alert controllers must be created with alertControllerWithTitle:message: */
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
+
+/**
+ An object conforming to MDCAlertControllerDelegate. When non-nil, the MDCAlertController will call
+ the appropriate MDCAlertControllerDelegate methods on this object.
+ */
+@property(nonatomic, weak, nullable) id<MDCAlertControllerDelegate> delegate;
 
 /** The font applied to the title of Alert Controller.*/
 @property(nonatomic, strong, nullable) UIFont *titleFont;

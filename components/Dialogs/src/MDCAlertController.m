@@ -73,7 +73,7 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
 
 @end
 
-@interface MDCAlertController ()
+@interface MDCAlertController () <MDCDialogPresentationControllerDelegate>
 
 @property(nonatomic, nullable, weak) MDCAlertControllerView *alertView;
 @property(nonatomic, strong) MDCDialogTransitionController *transitionController;
@@ -128,6 +128,11 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
     super.modalPresentationStyle = UIModalPresentationCustom;
   }
   return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  [self mdc_dialogPresentationController].dialogPresentationControllerDelegate = self;
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -624,6 +629,15 @@ static NSString *const kMaterialDialogsBundle = @"MaterialDialogs.bundle";
     return YES;
   }
   return NO;
+}
+
+#pragma mark - MDCDialogPresentationControllerDelegate
+
+- (void)dialogPresentationControllerDidDismiss:
+    (MDCDialogPresentationController *)dialogPresentationController {
+  if ([self.delegate respondsToSelector:@selector(dialogControllerDidDismiss:)]) {
+    [self.delegate dialogControllerDidDismiss:self];
+  }
 }
 
 @end
