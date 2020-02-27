@@ -22,12 +22,17 @@
   NSMutableArray *customLayoutAttributes =
       [NSMutableArray arrayWithCapacity:layoutAttributes.count];
 
+  // Left-align cells
   UICollectionViewLayoutAttributes *prevAttrs;
   for (UICollectionViewLayoutAttributes *attrs in layoutAttributes) {
     UICollectionViewLayoutAttributes *newAttrs = [attrs copy];
     if (newAttrs.representedElementCategory == UICollectionElementCategoryCell) {
       CGRect frame = newAttrs.frame;
-      if (!prevAttrs || (CGRectGetMinY(newAttrs.frame) != CGRectGetMinY(prevAttrs.frame))) {
+      // If the attributes are for a cell that isn't on the same line as the previous cell, set the
+      // x origin of the frame to 0. Otherwise, align the frame to the right end of the previous
+      // frame (accounting for minimumInteritemSpacing).
+      BOOL isNewLine = CGRectGetMinY(newAttrs.frame) != CGRectGetMinY(prevAttrs.frame);
+      if (!prevAttrs || isNewLine) {
         newAttrs.frame = CGRectMake(self.sectionInset.left, CGRectGetMinY(frame),
                                     CGRectGetWidth(frame), CGRectGetHeight(frame));
       } else {
