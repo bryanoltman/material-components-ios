@@ -57,6 +57,8 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
+- (CGRect)pointerEffectHoverRect;
+
 #pragma mark - UILargeContentViewerItem
 
 /**

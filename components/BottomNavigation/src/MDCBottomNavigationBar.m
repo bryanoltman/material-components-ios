@@ -928,10 +928,13 @@ static NSString *const kOfAnnouncement = @"of";
 - (UIPointerStyle *)pointerInteraction:(UIPointerInteraction *)interaction
                         styleForRegion:(UIPointerRegion *)region API_AVAILABLE(ios(13.4)) {
   UIPointerStyle *pointerStyle = nil;
-  if (interaction.view) {
+  if (interaction.view && [interaction.view isKindOfClass:[MDCBottomNavigationItemView class]]) {
+    MDCBottomNavigationItemView *view = interaction.view;
     UITargetedPreview *targetedPreview = [[UITargetedPreview alloc] initWithView:interaction.view];
     UIPointerEffect *highlightEffect = [UIPointerHighlightEffect effectWithPreview:targetedPreview];
-    pointerStyle = [UIPointerStyle styleWithEffect:highlightEffect shape:nil];
+    CGRect hoverRect = [view convertRect:[view pointerEffectHoverRect] toView:self];
+    UIPointerShape *shape = [UIPointerShape shapeWithRoundedRect:hoverRect];
+    pointerStyle = [UIPointerStyle styleWithEffect:highlightEffect shape:shape];
   }
   return pointerStyle;
 }

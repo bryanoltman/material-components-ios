@@ -221,6 +221,11 @@ static NSString *const kMDCBottomNavigationItemViewTabString = @"tab";
   return CGRectStandardize(CGRectUnion(labelFrame, CGRectUnion(iconFrame, badgeFrame))).size;
 }
 
+- (CGRect)pointerEffectHoverRect {
+  CGRect contentRect = self.label.isHidden? self.iconImageView.frame : CGRectUnion(self.iconImageView.frame, self.label.frame);
+  return CGRectInset(contentRect, -12, -12);
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
 
@@ -406,6 +411,15 @@ static NSString *const kMDCBottomNavigationItemViewTabString = @"tab";
         break;
     }
   }
+
+#ifdef __IPHONE_13_4
+  if (@available(iOS 13.4, *)) {
+    for (UIPointerInteraction *interaction in self.interactions) {
+      [interaction invalidate];
+    }
+  }
+#endif
+
   [self setNeedsLayout];
 }
 
