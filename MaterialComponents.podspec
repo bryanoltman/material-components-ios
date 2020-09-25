@@ -9,7 +9,7 @@ Pod::Spec.new do |mdc|
   mdc.license      = "Apache 2.0"
   mdc.source       = { :git => "https://github.com/material-components/material-components-ios.git",
                        :tag => "v#{mdc.version}" }
-  mdc.platform     = :ios, :tvos
+  mdc.platform     = :tvos
   mdc.requires_arc = true
   mdc.ios.deployment_target = '10.0'
 
