@@ -1286,6 +1286,7 @@ Pod::Spec.new do |mdc|
 
   mdc.subspec "ScalableFontDescriptor" do |component|
     component.ios.deployment_target = '10.0'
+    component.platform = :tvos
     component.public_header_files = "components/#{component.base_name}/src/*.h"
     component.source_files = "components/#{component.base_name}/src/*.{h,m}"
 
